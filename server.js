@@ -4,8 +4,7 @@
 'use strict';
 const http=require('http'),fs=require('fs'),path=require('path'),crypto=require('crypto');
 const PORT=+process.env.PORT||8080,LAG=+process.env.LAG_MS||0;// LAG_MS: test için yapay gecikme (her mesaj için)
-const PUB=path.join(__dirname,'public');
-// ---------------- statik site ----------------
+const PUB=__dirname;// ---------------- statik site ----------------
 const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript','.css':'text/css','.png':'image/png','.ico':'image/x-icon','.json':'application/json'};
 const server=http.createServer((req,res)=>{let u=decodeURIComponent((req.url||'/').split('?')[0]);if(u==='/health'){res.writeHead(200,{'content-type':'text/plain'});res.end('ok '+rooms.size);return}
   if(u==='/')u='/index.html';const fp=path.normalize(path.join(PUB,u));if(!fp.startsWith(PUB)){res.writeHead(403);res.end();return}
